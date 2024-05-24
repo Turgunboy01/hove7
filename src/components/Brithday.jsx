@@ -33,7 +33,7 @@ const Birthday = () => {
 
     if (ageDays < 0) {
       ageMonths -= 1;
-      ageDays += new Date(year, month - 1, 0).getDate(); // Tug'ilgan oyining oxirgi kuni
+      ageDays += new Date(year, month - 1, 0).getDate();
     }
 
     if (ageMonths < 0) {
@@ -64,20 +64,20 @@ const Birthday = () => {
       setErrors(validationErrors);
     }
   };
-  console.log(day, month, year);
+  
 
   return (
     <div className="bg-gray-100 flex min-h-screen flex-col items-center justify-center  ">
       <div className="bg-white rounded-[20px] rounded-br-[100px] p-[70px]  ">
         <form onSubmit={handleSubmit}>
-          <div className="flex  gap-[20px]">
+          <div className="flex  sm:gap-[20px] gap-[10px]">
             <div className=" flex flex-col  ">
               <label htmlFor="day" className="text-xs font-[900] text-[gray]">
                 DAY
               </label>
               <input
                 type="number"
-                className="w-25 px-3 py-2 border mt-1 border-gray-400 rounded-xl outline-none font-[900]"
+                className="max-w-25 w-full px-3 py-2 border mt-1 border-gray-400 rounded-xl outline-none font-[900]"
                 placeholder="DD"
                 name="day"
                 value={day}
@@ -105,7 +105,7 @@ const Birthday = () => {
               <input
                 type="number"
                 placeholder="MM"
-                className="w-25 px-3 py-2 border border-gray-400 rounded-xl outline-none font-[900]"
+                className="max-w-25 w-full px-3 py-2 border border-gray-400 rounded-xl outline-none font-[900]"
                 name="month"
                 id="month"
                 value={month}
@@ -131,7 +131,7 @@ const Birthday = () => {
               <input
                 type="number"
                 placeholder="YYYY"
-                className="w-25 px-3 py-2 border border-gray-400 rounded-xl outline-none font-[900]"
+                className="max-w-25 w-full px-3 py-2 border border-gray-400 rounded-xl outline-none font-[900]"
                 name="year"
                 id="year"
                 value={year}
@@ -167,19 +167,21 @@ const Birthday = () => {
             <span className="text-[50px] font-[900] text-purple-400">
               {age ? age.years : "- -"}
             </span>
-            <span className="text-[50px] font-[900]">years</span>
+            <span className="sm:text-[50px] text-[35px] font-[900]">years</span>
           </div>{" "}
           <div className="flex items-center gap-2">
             <span className="text-[50px] font-[900] text-purple-400">
               {age ? age.months : "- -"}
             </span>
-            <span className="text-[50px] font-[900]">months</span>
+            <span className="sm:text-[50px] text-[35px] font-[900]">
+              months
+            </span>
           </div>{" "}
           <div className="flex gap-2 items-center">
             <span className="text-[50px] font-[900] text-purple-400">
               {age ? age.days : "- -"}
             </span>
-            <span className="text-[50px] font-[900]">days</span>
+            <span className="sm:text-[50px] text-[35px] font-[900]">days</span>
           </div>
         </div>
       </div>

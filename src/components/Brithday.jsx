@@ -157,7 +157,7 @@ const Birthday = () => {
           <button
             type="button"
             onClick={handleButtonClick}
-            className="absolute -top-5 right-0 flex h-12 w-12 items-center justify-center rounded-full bg-purple-500"
+            className="absolute -top-5 right-0 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-purple-500"
           >
             <img src={arrow} className="h-8 w-8" alt="a" />
           </button>{" "}

@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setDay,
+  setMonth,
+  setYear,
+  setAge,
+  setErrors,
+} from "../redux/BrithdaySlice";
 import arrow from "../assets/icon-arrow.svg";
 
 const Birthday = () => {
-  const [day, setDay] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
-  const [age, setAge] = useState(null);
-  const [errors, setErrors] = useState({});
+  const { day, month, year, age, errors } = useSelector(
+    (state) => state.birthday
+  );
+  const dispatch = useDispatch();
 
   const validateInputs = () => {
     let tempErrors = {};
@@ -41,7 +48,7 @@ const Birthday = () => {
       ageYears -= 1;
     }
 
-    setAge({ years: ageYears, months: ageMonths, days: ageDays });
+    dispatch(setAge({ years: ageYears, months: ageMonths, days: ageDays }));
   };
 
   const handleSubmit = (e) => {
@@ -49,9 +56,9 @@ const Birthday = () => {
     const validationErrors = validateInputs();
     if (Object.keys(validationErrors).length === 0) {
       calculateAge();
-      setErrors({});
+      dispatch(setErrors({}));
     } else {
-      setErrors(validationErrors);
+      dispatch(setErrors(validationErrors));
     }
   };
 
@@ -59,19 +66,18 @@ const Birthday = () => {
     const validationErrors = validateInputs();
     if (Object.keys(validationErrors).length === 0) {
       calculateAge();
-      setErrors({});
+      dispatch(setErrors({}));
     } else {
-      setErrors(validationErrors);
+      dispatch(setErrors(validationErrors));
     }
   };
-  
 
   return (
-    <div className="bg-gray-100 flex min-h-screen flex-col items-center justify-center  ">
-      <div className="bg-white rounded-[20px] rounded-br-[100px] p-[70px]  ">
+    <div className="bg-gray-100 flex min-h-screen flex-col items-center justify-center">
+      <div className="bg-white rounded-[20px] rounded-br-[100px] p-[70px]">
         <form onSubmit={handleSubmit}>
-          <div className="flex  sm:gap-[20px] gap-[10px]">
-            <div className=" flex flex-col  ">
+          <div className="flex sm:gap-[20px] gap-[10px]">
+            <div className="flex flex-col">
               <label htmlFor="day" className="text-xs font-[900] text-[gray]">
                 DAY
               </label>
@@ -81,7 +87,7 @@ const Birthday = () => {
                 placeholder="DD"
                 name="day"
                 value={day}
-                onChange={(e) => setDay(e.target.value)}
+                onChange={(e) => dispatch(setDay(e.target.value))}
                 id="day"
                 required
               />
@@ -98,7 +104,7 @@ const Birthday = () => {
                 </p>
               )}
             </div>
-            <div className=" flex flex-col gap-1  ">
+            <div className="flex flex-col gap-1">
               <label htmlFor="month" className="text-xs font-[900] text-[gray]">
                 MONTH
               </label>
@@ -109,9 +115,9 @@ const Birthday = () => {
                 name="month"
                 id="month"
                 value={month}
-                onChange={(e) => setMonth(e.target.value)}
+                onChange={(e) => dispatch(setMonth(e.target.value))}
                 required
-              />{" "}
+              />
               {errors.month && (
                 <p
                   style={{
@@ -124,7 +130,7 @@ const Birthday = () => {
                 </p>
               )}
             </div>
-            <div className="  flex flex-col gap-1 ">
+            <div className="flex flex-col gap-1">
               <label htmlFor="year" className="text-xs font-[900] text-[gray]">
                 YEAR
               </label>
@@ -135,7 +141,7 @@ const Birthday = () => {
                 name="year"
                 id="year"
                 value={year}
-                onChange={(e) => setYear(e.target.value)}
+                onChange={(e) => dispatch(setYear(e.target.value))}
                 required
               />
               {errors.year && (
@@ -160,7 +166,7 @@ const Birthday = () => {
             className="absolute -top-5 right-0 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-purple-500"
           >
             <img src={arrow} className="h-8 w-8" alt="a" />
-          </button>{" "}
+          </button>
         </div>
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
@@ -168,7 +174,7 @@ const Birthday = () => {
               {age ? age.years : "- -"}
             </span>
             <span className="sm:text-[50px] text-[35px] font-[900]">years</span>
-          </div>{" "}
+          </div>
           <div className="flex items-center gap-2">
             <span className="text-[50px] font-[900] text-purple-400">
               {age ? age.months : "- -"}
@@ -176,7 +182,7 @@ const Birthday = () => {
             <span className="sm:text-[50px] text-[35px] font-[900]">
               months
             </span>
-          </div>{" "}
+          </div>
           <div className="flex gap-2 items-center">
             <span className="text-[50px] font-[900] text-purple-400">
               {age ? age.days : "- -"}
